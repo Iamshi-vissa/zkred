@@ -40,6 +40,10 @@ npm install
 ```
 
 ```bash
+npm run circuits:compile
+```
+
+```bash
 npm test
 ```
 
@@ -56,7 +60,7 @@ Configuration knobs (environment variables):
 
 ## Progress
 - [x] Step 1: scaffold, toolchain, off-chain primitives (field, Poseidon, identity/nullifier, Merkle tree), secret scanner
-- [ ] Step 2: circuits
+- [x] Step 2: circuits (`credential.circom` + `lib/merkle.circom` + `lib/age.circom`), constraint table in `docs/circuit-constraints.md`
 - [ ] Step 3: trusted setup + verifier export
 - [ ] Step 4: contracts (Registry, Gate, ZKRED token)
 - [ ] Step 5: end-to-end flow

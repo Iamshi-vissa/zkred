@@ -9,7 +9,10 @@
 | D5 | Domain-separated Poseidon: `idCommitment = H(1, ns, td)`, `nullifier = H(2, ns, scope)` | Without the tag both are `H(ns, ·)`, so scope == trapdoor would make nullifier == commitment | 1 |
 | D6 | Off-chain code rejects values ≥ r instead of reducing them | Reduction lets `x` and `x + r` alias the same field element | 1 |
 | D7 | Merkle verification takes a fixed depth | An internal node + shorter path also hashes to the root; the circuit fixes depth, so the library does too | 1 |
-| D8 | Leaves (Poseidon arity 4) and internal nodes (arity 2) use different arities | Different Poseidon parameter sets, so a node can't be passed off as a leaf | 2 (planned) |
+| D8 | Leaves (Poseidon arity 4: `H(3, idCommitment, birthDate, credentialType)`) and internal nodes (arity 2) use different arities | Different Poseidon parameter sets, so a node can't be passed off as a leaf | 2 |
 | D9 | Attack tests live in `attacks/*/test.js`, loaded by `test/attacks.test.js` | Hardhat's mocha runner takes one test directory | 1 |
 | D10 | Optional `ZKRED_SOLC_PATH` local-compiler override | Some environments block Hardhat's compiler download host | 1 |
-| — | **Open:** date encoding (YYYYMMDD + vendored DateTime lib, vs days-since-epoch) | Needs owner decision before Step 2 | 2 |
+| D11 | `credentialType` is a public input, checked by the contract | Reveals the credential type (not identity); stops one type being used for another | 2 |
+| D12 | Dates are YYYYMMDD integers; age rule `currentDate − birthDate ≥ 180000` | Exact calendar age with no in-circuit calendar logic; the contract converts `block.timestamp` with a vendored BokkyPooBah DateTime library (Step 4) | 2 |
+| D13 | Circuits compiled with `--O2` | 7,252 → 3,338 constraints at depth 10 (fits a 2¹² ptau) | 2 |
+| D14 | Comparator width 33 bits over 32-bit range-checked dates | `birthDate + 180000 < 2³³`, so comparator inputs are always in range | 2 |

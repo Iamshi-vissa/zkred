@@ -12,7 +12,8 @@
     "compile": "hardhat build",
     "test": "hardhat test",
     "test:mocha": "hardhat test mocha",
-    "check:secrets": "node scripts/check-secrets.js"
+    "check:secrets": "node scripts/check-secrets.js",
+    "circuits:compile": "node scripts/circuits/compile.js"
   },
   "devDependencies": {
     "@nomicfoundation/hardhat-toolbox-mocha-ethers": "^4.0.0",
