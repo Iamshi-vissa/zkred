@@ -1,0 +1,14 @@
+node_modules/
+artifacts/
+cache/
+types/
+coverage/
+build/
+# Trusted-setup material and keys: never committed
+*.ptau
+*.zkey
+*.wtns
+keys/
+.env
+.env.*
+!.env.example
