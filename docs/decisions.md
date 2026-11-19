@@ -19,3 +19,9 @@
 | D15 | Trusted-setup outputs (zkey, vkey, generated verifier) are NOT committed; `npm test` runs `npm run setup` first, which is idempotent | Owner's choice: every machine runs its own setup |
 | D16 | Phase 1 = PSE Perpetual Powers of Tau (`ppot_0080`), SHA-256 pinned | Public multi-party ceremony; the Hermez URLs now deny access |
 | D17 | Phase 2 = one local contribution + random beacon, then `zkey verify` | Enough for a course demo; the single-contributor risk is documented and explored in lab 05 |
+| D18 | Reward: 100 ZKRED minted per claim; `ZKredToken` is deployed by the gate (sole `MINTER_ROLE`, no admin role) | Owner's choice; "only the gate can mint" is enforced by code, not by deploy-script discipline |
+| D19 | Registry owner (`Ownable2Step`) can rotate the issuer key and revoke roots, but cannot publish roots | Owner's choice; incident response for lab 04 with minimal extra power |
+| D20 | `Claimed(address indexed recipient, uint256 nullifierHash)` | Owner's choice; makes double-use observable |
+| D21 | Accepted dates: today or yesterday (UTC), never tomorrow | Tolerates the midnight boundary without allowing claims a day early |
+| D22 | Root validity = published within the last 30 epochs and not revoked (O(1) lookup via `rootEpoch`) | Proofs survive a root rotation; constant gas |
+| D23 | Strict sequential epochs in signed root updates | Old signatures can't be replayed; pre-signed updates die on rotation |

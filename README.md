@@ -66,6 +66,6 @@ Configuration knobs (environment variables):
 - [x] Step 1: scaffold, toolchain, off-chain primitives (field, Poseidon, identity/nullifier, Merkle tree), secret scanner
 - [x] Step 2: circuits (`credential.circom` + `lib/merkle.circom` + `lib/age.circom`), constraint table in `docs/circuit-constraints.md`
 - [x] Step 3: trusted setup (PSE ptau + local phase 2) and verifier export, see `docs/trusted-setup.md`
-- [ ] Step 4: contracts (Registry, Gate, ZKRED token)
+- [x] Step 4: contracts (Registry, CredentialGate, ZKredToken), see `docs/architecture.md` and `docs/threat-model.md`
 - [ ] Step 5: end-to-end flow
 - [ ] Step 6+: attack lab 01–06
