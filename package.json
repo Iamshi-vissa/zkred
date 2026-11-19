@@ -10,10 +10,12 @@
   },
   "scripts": {
     "compile": "hardhat build",
+    "circuits:compile": "node scripts/circuits/compile.js",
+    "setup": "node scripts/circuits/setup.js",
+    "pretest": "npm run setup",
     "test": "hardhat test",
     "test:mocha": "hardhat test mocha",
-    "check:secrets": "node scripts/check-secrets.js",
-    "circuits:compile": "node scripts/circuits/compile.js"
+    "check:secrets": "node scripts/check-secrets.js"
   },
   "devDependencies": {
     "@nomicfoundation/hardhat-toolbox-mocha-ethers": "^4.0.0",

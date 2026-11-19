@@ -21,3 +21,19 @@ function readDepth() {
 
 export const MERKLE_DEPTH = readDepth();
 export { SUPPORTED_DEPTHS };
+
+// Powers of Tau (phase 1) from the public PSE Perpetual Powers of Tau ceremony
+// (continuation of the Hermez/Zcash ceremony; 80 contributions). The setup
+// script picks the smallest power that fits the circuit, downloads it if
+// missing, and refuses to use a file whose SHA-256 does not match.
+// Depth 10 needs 2^12; depths 16 and 20 need 2^13.
+export const PTAU = Object.freeze({
+  12: {
+    url: "https://pse-trusted-setup-ppot.s3.eu-central-1.amazonaws.com/pot28_0080/ppot_0080_12.ptau",
+    sha256: "35e163120e724a60853d0dd76ec54037f7c7b00584392255f71a4341d5a05c50",
+  },
+  13: {
+    url: "https://pse-trusted-setup-ppot.s3.eu-central-1.amazonaws.com/pot28_0080/ppot_0080_13.ptau",
+    sha256: "ccee28086e4b81d81a6e16fdee054d1dbd5276362e2662d4205d31de45cb930f",
+  },
+});

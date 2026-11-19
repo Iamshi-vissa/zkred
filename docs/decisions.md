@@ -16,3 +16,6 @@
 | D12 | Dates are YYYYMMDD integers; age rule `currentDate − birthDate ≥ 180000` | Exact calendar age with no in-circuit calendar logic; the contract converts `block.timestamp` with a vendored BokkyPooBah DateTime library (Step 4) | 2 |
 | D13 | Circuits compiled with `--O2` | 7,252 → 3,338 constraints at depth 10 (fits a 2¹² ptau) | 2 |
 | D14 | Comparator width 33 bits over 32-bit range-checked dates | `birthDate + 180000 < 2³³`, so comparator inputs are always in range | 2 |
+| D15 | Trusted-setup outputs (zkey, vkey, generated verifier) are NOT committed; `npm test` runs `npm run setup` first, which is idempotent | Owner's choice: every machine runs its own setup |
+| D16 | Phase 1 = PSE Perpetual Powers of Tau (`ppot_0080`), SHA-256 pinned | Public multi-party ceremony; the Hermez URLs now deny access |
+| D17 | Phase 2 = one local contribution + random beacon, then `zkey verify` | Enough for a course demo; the single-contributor risk is documented and explored in lab 05 |

@@ -40,12 +40,16 @@ npm install
 ```
 
 ```bash
-npm run circuits:compile
+npm run setup
 ```
 
 ```bash
 npm test
 ```
+
+`npm run setup` compiles the circuit, downloads the pinned Powers of Tau and runs
+the circuit-specific setup (about 30 s). `npm test` runs it automatically first;
+it is skipped when the circuit hasn't changed.
 
 ```bash
 npm run check:secrets
@@ -61,7 +65,7 @@ Configuration knobs (environment variables):
 ## Progress
 - [x] Step 1: scaffold, toolchain, off-chain primitives (field, Poseidon, identity/nullifier, Merkle tree), secret scanner
 - [x] Step 2: circuits (`credential.circom` + `lib/merkle.circom` + `lib/age.circom`), constraint table in `docs/circuit-constraints.md`
-- [ ] Step 3: trusted setup + verifier export
+- [x] Step 3: trusted setup (PSE ptau + local phase 2) and verifier export, see `docs/trusted-setup.md`
 - [ ] Step 4: contracts (Registry, Gate, ZKRED token)
 - [ ] Step 5: end-to-end flow
 - [ ] Step 6+: attack lab 01–06
