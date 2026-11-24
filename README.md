@@ -19,6 +19,7 @@ OpenZeppelin, JavaScript (Python only where it reads better, e.g. lab 04 math).
 - `attacks/`    One folder per attack: vulnerable code, exploit, fix, test (see `attacks/README.md`)
 - `scripts/`    Issuer tooling, proof generation, deployment; `scripts/lib/` holds the off-chain primitives
 - `test/`       Hardhat tests (`test/attacks.test.js` also runs every `attacks/*/test.js`)
+- `web/`        Live demo app (Vite + React); `web/public/circuit/` holds the frozen demo setup (D27)
 - `docs/`       Design doc, threat model, decisions, report material
 - `zkred.config.js`  Protocol parameters shared by everything (e.g. `MERKLE_DEPTH`)
 
@@ -90,4 +91,5 @@ Configuration knobs (environment variables):
 - [x] Step 3: trusted setup (PSE ptau + local phase 2) and verifier export, see `docs/trusted-setup.md`
 - [x] Step 4: contracts (Registry, CredentialGate, ZKredToken), see `docs/architecture.md` and `docs/threat-model.md`
 - [x] Step 5: end-to-end flow (`npm run demo`, `scripts/deploy.js`)
-- [ ] Step 6+: attack lab 01–06
+- [ ] Step 6+: attack lab 01–06 (01 done)
+- [ ] Live demo on Sepolia + Vercel, see `docs/live-demo.md` (demo step 1 of 5 done: frozen setup)

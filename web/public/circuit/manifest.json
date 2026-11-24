@@ -1,0 +1,38 @@
+{
+  "note": "Frozen demo setup for the live Sepolia demo (docs/decisions.md D27). One local contribution + beacon: trust the person who ran it. Not for production.",
+  "circuit": "circuits/credential.circom",
+  "depth": 10,
+  "nConstraints": 3338,
+  "publicSignals": [
+    "root",
+    "nullifierHash",
+    "scope",
+    "credentialType",
+    "currentDate",
+    "recipient"
+  ],
+  "r1csSha256": "000134017a9bdbcc182e828e1c3a0dd9eb27e1e131a6710589a8c4e51cac4dbd",
+  "ptau": "ppot_0080_12.ptau",
+  "ptauSha256": "35e163120e724a60853d0dd76ec54037f7c7b00584392255f71a4341d5a05c50",
+  "beacon": "f57c9cd9073cd3ab4eaca2bd562f854af62d60fe967c379832dcff00e2fe65f0",
+  "files": {
+    "wasm": {
+      "file": "credential.wasm",
+      "sha256": "b100c7c95802b44618a9d8f4f38620ec34a37787ae54dfd5e3d0d8b8ba82484e"
+    },
+    "zkey": {
+      "file": "credential.zkey",
+      "sha256": "548016a578531c79ca9a529b6a87bb9bad08afec455319e6b32ee8539c8624bc"
+    },
+    "vkey": {
+      "file": "vkey.json",
+      "sha256": "056cfab30d747178241d0b87d827707e1e73cc0c2dd5c272322811eb7c0445e5"
+    }
+  },
+  "verifier": {
+    "contract": "DemoCredentialVerifier",
+    "path": "contracts/demo/DemoCredentialVerifier.sol"
+  },
+  "verifierSha256": "21694fd9c12c447baa2d92767c4735e89c33a5b781920b35b91c6c8a8a916a83",
+  "frozenAt": "2026-11-24T07:36:26.058Z"
+}

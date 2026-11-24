@@ -3,13 +3,15 @@ import { CREDENTIAL_TYPES } from "./credential.js";
 
 /**
  * Deploys Registry, CredentialVerifier and CredentialGate (which deploys ZKredToken).
+ * `verifierName` selects the verifier contract: "CredentialVerifier" (this
+ * machine's setup) or "DemoCredentialVerifier" (the frozen demo setup, D27).
  * @returns {{ registry, verifier, gate, token }}
  */
-export async function deploySystem(ethers, { owner, issuerAddress, actionId = 1n, credentialType = CREDENTIAL_TYPES.ENROLLED_STUDENT, deployer } = {}) {
+export async function deploySystem(ethers, { owner, issuerAddress, actionId = 1n, credentialType = CREDENTIAL_TYPES.ENROLLED_STUDENT, deployer, verifierName = "CredentialVerifier" } = {}) {
   if (!owner || !issuerAddress) throw new Error("deploySystem needs owner and issuerAddress");
   const ownerAddress = owner.address ?? owner;
   const registry = await ethers.deployContract("Registry", [ownerAddress, issuerAddress], deployer);
-  const verifier = await ethers.deployContract("CredentialVerifier", [], deployer);
+  const verifier = await ethers.deployContract(verifierName, [], deployer);
   const gate = await ethers.deployContract("CredentialGate", [registry, verifier, actionId, credentialType], deployer);
   await gate.waitForDeployment();
   const token = await ethers.getContractAt("ZKredToken", await gate.token());

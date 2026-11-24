@@ -63,6 +63,31 @@ hashes and the beacon. Setup is skipped while the r1cs is unchanged; editing a
 circuit automatically triggers a fresh setup. Use `npm run setup -- --force`
 to redo it anyway.
 
+## Exception: the frozen demo setup (D27)
+The live demo can't use a per-machine setup: the browser needs a proving key,
+the Sepolia verifier must match it, and Vercel can't compile circuits. So one
+setup is frozen and committed:
+
+| File | Purpose |
+|---|---|
+| `web/public/circuit/credential.wasm` | witness generator the browser runs |
+| `web/public/circuit/credential.zkey` | the demo proving key (about 2 MB) |
+| `web/public/circuit/vkey.json` | its verification key |
+| `web/public/circuit/manifest.json` | SHA-256 of each file, the circuit's r1cs hash, ptau, beacon |
+| `contracts/demo/DemoCredentialVerifier.sol` | the matching Solidity verifier, deployed to Sepolia |
+
+`npm run demo:freeze` creates it from this machine's current setup and refuses
+to overwrite an existing set without `--force`, because re-freezing changes the
+verification key and the Sepolia verifier would have to be redeployed.
+`test/demo/frozen.test.js` checks the hashes, that the circuit hasn't changed
+since freezing, that the zkey is a valid Phase 2 for the r1cs and pinned ptau
+(`zkey verify`), and that a key from any other Phase 2 doesn't fit.
+
+**Trust caveat.** Phase 2 here had one contributor (whoever ran the freeze) plus
+a beacon. If that person kept the contribution's randomness, they could forge
+proofs for the demo (lab 05). snarkjs discards it, but you have to trust that.
+A real deployment would run a multi-party Phase 2 ceremony.
+
 ## Measured (depth 10, this machine)
 | Metric | Value |
 |---|---|
