@@ -1,0 +1,30 @@
+# circomspect v0.9.0 -L node_modules -l INFO attacks/01-underconstrained/fixed/credential_01b_fixed.circom
+circomspect: analyzing template 'CredentialFixed01b'
+note: Field element arithmetic could overflow, which may produce unexpected results.
+   ┌─ attacks/01-underconstrained/fixed/credential_01b_fixed.circom:47:19
+   │
+47 │     geq.in[1] <== birthDate + 18 * 10000;
+   │                   ^^^^^^^^^^^^^^^^^^^^^^ Field element arithmetic here.
+   │
+   = For more details, see https://github.com/trailofbits/circomspect/blob/main/doc/analysis_passes.md#field-element-arithmetic.
+
+note: Field element arithmetic could overflow, which may produce unexpected results.
+   ┌─ attacks/01-underconstrained/fixed/credential_01b_fixed.circom:53:32
+   │
+53 │     signal recipientSquare <== recipient * recipient;
+   │                                ^^^^^^^^^^^^^^^^^^^^^ Field element arithmetic here.
+   │
+   = For more details, see https://github.com/trailofbits/circomspect/blob/main/doc/analysis_passes.md#field-element-arithmetic.
+
+warning: Intermediate signals should typically occur in at least two separate constraints.
+   ┌─ attacks/01-underconstrained/fixed/credential_01b_fixed.circom:53:5
+   │
+53 │     signal recipientSquare <== recipient * recipient;
+   │     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   │     │
+   │     The intermediate signal `recipientSquare` is declared here.
+   │     The intermediate signal `recipientSquare` is constrained here.
+   │
+   = For more details, see https://github.com/trailofbits/circomspect/blob/main/doc/analysis_passes.md#under-constrained-signal.
+
+circomspect: 3 issues found.

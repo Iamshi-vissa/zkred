@@ -17,7 +17,9 @@
     "test:mocha": "hardhat test mocha",
     "check:secrets": "node scripts/check-secrets.js",
     "demo": "hardhat run scripts/demo.js",
-    "deploy:local": "hardhat run scripts/deploy.js --network localhost"
+    "deploy:local": "hardhat run scripts/deploy.js --network localhost",
+    "lab:01": "npm run setup && hardhat run attacks/01-underconstrained/exploit.js",
+    "lab:01:circomspect": "bash attacks/01-underconstrained/circomspect/run.sh"
   },
   "devDependencies": {
     "@nomicfoundation/hardhat-toolbox-mocha-ethers": "^4.0.0",

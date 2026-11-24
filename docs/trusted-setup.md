@@ -16,6 +16,7 @@ ceremony's response number, not the contribution count.)
 |---|---|---|
 | 2¹² | depth 10 (3,338 constraints) | `35e163120e724a60853d0dd76ec54037f7c7b00584392255f71a4341d5a05c50` |
 | 2¹³ | depths 16 and 20 | `ccee28086e4b81d81a6e16fdee054d1dbd5276362e2662d4205d31de45cb930f` |
+| 2¹⁴ | lab 01b circuits (`--O0`, 10,936 constraints) | `3ca1149e9349b22b0ee0649399cfb787677129b7b1189d1899fc0d615d9583db` |
 
 The hashes were recorded when the files were first downloaded (trust on first
 use). They were then checked independently:
@@ -27,8 +28,7 @@ npx snarkjs powersoftau verify build/ptau/ppot_0080_12.ptau
 recomputes the whole contribution chain. Result for the 2¹² file: **`Powers of
 Tau Ok!`**, with all 62 contributions (#1 to #62) checked. It took well over 30
 minutes on a 4-core sandbox, so it is a one-off check, not part of
-`npm run setup`. The 2¹³ file (depths 16/20) is pinned by hash but has not been
-chain-verified yet. `npm run setup` downloads the
+`npm run setup`. The 2¹³ and 2¹⁴ files are pinned by hash but have not been chain-verified yet. `npm run setup` downloads the
 file if it is missing and refuses to continue if the hash differs.
 
 > The older Hermez URLs (`hermez.s3-eu-west-1.amazonaws.com`,

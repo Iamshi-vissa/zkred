@@ -1,0 +1,53 @@
+# circomspect v0.9.0 -L node_modules -l INFO attacks/01-underconstrained/vulnerable/probes/p3_01b_boolean.circom
+circomspect: analyzing template 'CredentialProbeP3'
+warning: Using the signal assignment operator `<--` is not necessary here.
+   ┌─ attacks/01-underconstrained/vulnerable/probes/p3_01b_boolean.circom:49:5
+   │
+49 │     isAdult <-- geq.out;     // VULNERABLE: hint
+   │     ^^^^^^^^^^^^^^^^^^^ The expression assigned to `isAdult` is quadratic.
+   │
+   = Consider rewriting the statement using the constraint assignment operator `<==`.
+   = For more details, see https://github.com/trailofbits/circomspect/blob/main/doc/analysis_passes.md#unnecessary-signal-assignment.
+
+warning: The signal `isAdult` is not constrained by the template.
+   ┌─ attacks/01-underconstrained/vulnerable/probes/p3_01b_boolean.circom:22:5
+   │
+22 │     signal output isAdult;   // public output, checked == 1 by VulnGate01b
+   │     ^^^^^^^^^^^^^^^^^^^^^ This signal does not occur in a constraint.
+
+note: Field element arithmetic could overflow, which may produce unexpected results.
+   ┌─ attacks/01-underconstrained/vulnerable/probes/p3_01b_boolean.circom:48:19
+   │
+48 │     geq.in[1] <== birthDate + 18 * 10000;
+   │                   ^^^^^^^^^^^^^^^^^^^^^^ Field element arithmetic here.
+   │
+   = For more details, see https://github.com/trailofbits/circomspect/blob/main/doc/analysis_passes.md#field-element-arithmetic.
+
+note: Field element arithmetic could overflow, which may produce unexpected results.
+   ┌─ attacks/01-underconstrained/vulnerable/probes/p3_01b_boolean.circom:50:5
+   │
+50 │     isAdult * (isAdult - 1) === 0;   // only "isAdult is a bit"
+   │     ^^^^^^^^^^^^^^^^^^^^^^^ Field element arithmetic here.
+   │
+   = For more details, see https://github.com/trailofbits/circomspect/blob/main/doc/analysis_passes.md#field-element-arithmetic.
+
+note: Field element arithmetic could overflow, which may produce unexpected results.
+   ┌─ attacks/01-underconstrained/vulnerable/probes/p3_01b_boolean.circom:55:32
+   │
+55 │     signal recipientSquare <== recipient * recipient;
+   │                                ^^^^^^^^^^^^^^^^^^^^^ Field element arithmetic here.
+   │
+   = For more details, see https://github.com/trailofbits/circomspect/blob/main/doc/analysis_passes.md#field-element-arithmetic.
+
+warning: Intermediate signals should typically occur in at least two separate constraints.
+   ┌─ attacks/01-underconstrained/vulnerable/probes/p3_01b_boolean.circom:55:5
+   │
+55 │     signal recipientSquare <== recipient * recipient;
+   │     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   │     │
+   │     The intermediate signal `recipientSquare` is declared here.
+   │     The intermediate signal `recipientSquare` is constrained here.
+   │
+   = For more details, see https://github.com/trailofbits/circomspect/blob/main/doc/analysis_passes.md#under-constrained-signal.
+
+circomspect: 6 issues found.

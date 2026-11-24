@@ -25,3 +25,6 @@
 | D21 | Accepted dates: today or yesterday (UTC), never tomorrow | Tolerates the midnight boundary without allowing claims a day early |
 | D22 | Root validity = published within the last 30 epochs and not revoked (O(1) lookup via `rootEpoch`) | Proofs survive a root rotation; constant gas |
 | D23 | Strict sequential epochs in signed root updates | Old signatures can't be replayed; pre-signed updates die on rotation |
+| D24 | Lab 01b circuits compiled with `--O0`; 2¹⁴ ptau pinned for them | Same wire layout for vulnerable and fixed, so `wtns check` on one patched witness is a fair comparison (O2 differs by one wire) |
+| D25 | Lab 01a reuses the secure `CredentialGate` contract with the broken circuit's verifier | Shows the bug is purely in the circuit |
+| D26 | `npm run setup` covers every circuit in `scripts/circuits/registry.js` | Lab circuits get their own zkeys/verifiers, generated and gitignored |

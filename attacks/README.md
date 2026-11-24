@@ -22,8 +22,7 @@ so `npm test` runs the whole lab.
 
 | # | Attack | Status |
 |---|--------|--------|
-| 00 | Toolchain smoke test (not an attack) | Step 1 |
-| 01 | Under-constrained circuit (forged age proof) | planned |
+| 01 | Under-constrained circuit (forged age proof): 01a missing `=== 1`, 01b `<--` + witness patching, circomspect study | done |
 | 02 | Proof replay / front-running | planned |
 | 03 | Double use without nullifier | planned |
 | 04 | Issuer ECDSA nonce reuse → key recovery → forged root | planned |

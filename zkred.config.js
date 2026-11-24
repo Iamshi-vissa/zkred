@@ -27,7 +27,9 @@ export { SUPPORTED_DEPTHS };
 // the file, verified with `snarkjs powersoftau verify`). The setup
 // script picks the smallest power that fits the circuit, downloads it if
 // missing, and refuses to use a file whose SHA-256 does not match.
-// Depth 10 needs 2^12; depths 16 and 20 need 2^13.
+// Depth 10 needs 2^12; depths 16 and 20 need 2^13. 2^14 is for lab 01b, which
+// is compiled without optimisation (--O0) so that its vulnerable and fixed
+// versions have identical wires.
 export const PTAU = Object.freeze({
   12: {
     url: "https://pse-trusted-setup-ppot.s3.eu-central-1.amazonaws.com/pot28_0080/ppot_0080_12.ptau",
@@ -36,5 +38,9 @@ export const PTAU = Object.freeze({
   13: {
     url: "https://pse-trusted-setup-ppot.s3.eu-central-1.amazonaws.com/pot28_0080/ppot_0080_13.ptau",
     sha256: "ccee28086e4b81d81a6e16fdee054d1dbd5276362e2662d4205d31de45cb930f",
+  },
+  14: {
+    url: "https://pse-trusted-setup-ppot.s3.eu-central-1.amazonaws.com/pot28_0080/ppot_0080_14.ptau",
+    sha256: "3ca1149e9349b22b0ee0649399cfb787677129b7b1189d1899fc0d615d9583db",
   },
 });

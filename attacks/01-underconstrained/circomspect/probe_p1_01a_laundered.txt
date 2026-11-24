@@ -1,0 +1,41 @@
+# circomspect v0.9.0 -L node_modules -l INFO attacks/01-underconstrained/vulnerable/probes/p1_01a_laundered.circom
+circomspect: analyzing template 'CredentialProbeP1'
+note: Field element arithmetic could overflow, which may produce unexpected results.
+   ┌─ attacks/01-underconstrained/vulnerable/probes/p1_01a_laundered.circom:46:19
+   │
+46 │     geq.in[1] <== birthDate + 18 * 10000;
+   │                   ^^^^^^^^^^^^^^^^^^^^^^ Field element arithmetic here.
+   │
+   = For more details, see https://github.com/trailofbits/circomspect/blob/main/doc/analysis_passes.md#field-element-arithmetic.
+
+note: Field element arithmetic could overflow, which may produce unexpected results.
+   ┌─ attacks/01-underconstrained/vulnerable/probes/p1_01a_laundered.circom:52:32
+   │
+52 │     signal recipientSquare <== recipient * recipient;
+   │                                ^^^^^^^^^^^^^^^^^^^^^ Field element arithmetic here.
+   │
+   = For more details, see https://github.com/trailofbits/circomspect/blob/main/doc/analysis_passes.md#field-element-arithmetic.
+
+warning: Intermediate signals should typically occur in at least two separate constraints.
+   ┌─ attacks/01-underconstrained/vulnerable/probes/p1_01a_laundered.circom:47:5
+   │
+47 │     signal isAdult <== geq.out;   // VULNERABLE: computed, still never enforced
+   │     ^^^^^^^^^^^^^^^^^^^^^^^^^^
+   │     │
+   │     The intermediate signal `isAdult` is declared here.
+   │     The intermediate signal `isAdult` is constrained here.
+   │
+   = For more details, see https://github.com/trailofbits/circomspect/blob/main/doc/analysis_passes.md#under-constrained-signal.
+
+warning: Intermediate signals should typically occur in at least two separate constraints.
+   ┌─ attacks/01-underconstrained/vulnerable/probes/p1_01a_laundered.circom:52:5
+   │
+52 │     signal recipientSquare <== recipient * recipient;
+   │     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   │     │
+   │     The intermediate signal `recipientSquare` is declared here.
+   │     The intermediate signal `recipientSquare` is constrained here.
+   │
+   = For more details, see https://github.com/trailofbits/circomspect/blob/main/doc/analysis_passes.md#under-constrained-signal.
+
+circomspect: 4 issues found.
