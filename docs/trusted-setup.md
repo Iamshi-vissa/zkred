@@ -28,7 +28,10 @@ npx snarkjs powersoftau verify build/ptau/ppot_0080_12.ptau
 recomputes the whole contribution chain. Result for the 2¹² file: **`Powers of
 Tau Ok!`**, with all 62 contributions (#1 to #62) checked. It took well over 30
 minutes on a 4-core sandbox, so it is a one-off check, not part of
-`npm run setup`. The 2¹³ and 2¹⁴ files are pinned by hash but have not been chain-verified yet. `npm run setup` downloads the
+`npm run setup`. The 2¹⁴ file (`ppot_0080_14.ptau`, used by the lab 01b
+circuits) was verified the same way: **`Powers of Tau Ok!`**, 62
+contributions. The 2¹³ file is pinned by hash but has not been chain-verified
+yet. `npm run setup` downloads the
 file if it is missing and refuses to continue if the hash differs.
 
 > The older Hermez URLs (`hermez.s3-eu-west-1.amazonaws.com`,
