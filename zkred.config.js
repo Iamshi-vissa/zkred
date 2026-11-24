@@ -23,7 +23,8 @@ export const MERKLE_DEPTH = readDepth();
 export { SUPPORTED_DEPTHS };
 
 // Powers of Tau (phase 1) from the public PSE Perpetual Powers of Tau ceremony
-// (continuation of the Hermez/Zcash ceremony; 80 contributions). The setup
+// (continuation of the Hermez/Zcash ceremony; 62 contributions recorded in
+// the file, verified with `snarkjs powersoftau verify`). The setup
 // script picks the smallest power that fits the circuit, downloads it if
 // missing, and refuses to use a file whose SHA-256 does not match.
 // Depth 10 needs 2^12; depths 16 and 20 need 2^13.

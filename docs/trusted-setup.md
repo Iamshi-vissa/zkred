@@ -7,8 +7,10 @@ has two phases.
 
 ## Phase 1: Powers of Tau (universal)
 Source: the **PSE Perpetual Powers of Tau** ceremony, file `ppot_0080_<p>.ptau`
-(80 contributions, continuing the Zcash/Hermez ceremony). Phase 1 is secure if
-**at least one** of the 80 contributors destroyed their randomness.
+(continuing the Zcash/Hermez ceremony). The file records **62 contributions**,
+ending in a random beacon. Phase 1 is secure if **at least one** of those
+contributors destroyed their randomness. (`0080` in the file name is the
+ceremony's response number, not the contribution count.)
 
 | Power | Used for | SHA-256 (pinned in `zkred.config.js`) |
 |---|---|---|
@@ -16,9 +18,17 @@ Source: the **PSE Perpetual Powers of Tau** ceremony, file `ppot_0080_<p>.ptau`
 | 2¹³ | depths 16 and 20 | `ccee28086e4b81d81a6e16fdee054d1dbd5276362e2662d4205d31de45cb930f` |
 
 The hashes were recorded when the files were first downloaded (trust on first
-use). You can check a file independently with
-`npx snarkjs powersoftau verify build/ptau/ppot_0080_12.ptau`, which recomputes
-the whole contribution chain (slow: about 10+ minutes). `npm run setup` downloads the
+use). They were then checked independently:
+
+```bash
+npx snarkjs powersoftau verify build/ptau/ppot_0080_12.ptau
+```
+
+recomputes the whole contribution chain. Result for the 2¹² file: **`Powers of
+Tau Ok!`**, with all 62 contributions (#1 to #62) checked. It took well over 30
+minutes on a 4-core sandbox, so it is a one-off check, not part of
+`npm run setup`. The 2¹³ file (depths 16/20) is pinned by hash but has not been
+chain-verified yet. `npm run setup` downloads the
 file if it is missing and refuses to continue if the hash differs.
 
 > The older Hermez URLs (`hermez.s3-eu-west-1.amazonaws.com`,
