@@ -92,4 +92,4 @@ Configuration knobs (environment variables):
 - [x] Step 4: contracts (Registry, CredentialGate, ZKredToken), see `docs/architecture.md` and `docs/threat-model.md`
 - [x] Step 5: end-to-end flow (`npm run demo`, `scripts/deploy.js`)
 - [ ] Step 6+: attack lab 01–06 (01 done)
-- [ ] Live demo on Sepolia + Vercel, see `docs/live-demo.md` (demo step 1 of 5 done: frozen setup)
+- [ ] Live demo on Sepolia + Vercel, see `docs/live-demo.md` (demo steps 1–2 of 5 done: frozen setup, EnrolmentLog + Sepolia deploy script)

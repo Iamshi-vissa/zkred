@@ -7,10 +7,19 @@ ZKRED on Sepolia. Design approved by the owner (D27, D28).
 | # | Step | Status |
 |---|---|---|
 | 1 | Frozen demo setup: `web/public/circuit/` + `contracts/demo/DemoCredentialVerifier.sol` (`npm run demo:freeze`, `test/demo/frozen.test.js`) | done |
-| 2 | `EnrolmentLog` contract + `scripts/deploy-sepolia.js` (Hardhat keystore) | |
+| 2 | `EnrolmentLog` contract + `scripts/deploy-sepolia.js` (Hardhat keystore), `test/demo/enrolment.test.js` | done |
 | 3 | `web/api/enrol.js` serverless function (demo issuer + relayer) | |
 | 4 | React app with React Bits components: identity, enrol, prove (Web Worker), claim, "try to break it" | |
 | 5 | Vercel config, Sepolia deploy, smoke test | |
+
+## How enrolment works on-chain (D29)
+`EnrolmentLog.enrol(leaf, newRoot, epoch, issuerSignature)` is called by the
+relayer. In ONE transaction it logs `Enrolled(index, leaf, root)` and calls
+`Registry.updateRoot`. A bad issuer signature reverts both, so the logged
+leaves and the latest root can't disagree. The browser rebuilds the tree from
+the `Enrolled` events and refuses to prove if its root differs from
+`Registry.latestRoot()`. Only the relayer may enrol; the owner can replace it
+(`setRelayer`). Capacity is 2^MERKLE_DEPTH leaves.
 
 ## Keys and roles
 | Role | What it does | Needs ETH? | Where the key lives |
@@ -70,7 +79,22 @@ Each command asks for the keystore password (you choose it the first time)
 and then the value. It is stored encrypted outside the repo. Step 2 adds the
 `sepolia` network to `hardhat.config.js`, reading these two values.
 
-### 5. Vercel environment variables (after step 3 is built)
+### 5. Deploy to Sepolia (your machine)
+Once parts 1–4 are done, with the **addresses** (not keys) of the issuer and
+relayer:
+
+```bash
+ZKRED_ISSUER_ADDRESS=0x... ZKRED_RELAYER_ADDRESS=0x... npm run deploy:sepolia
+```
+
+It asks for the keystore password, refuses to run if the frozen demo setup has
+been altered, deploys `Registry`, `DemoCredentialVerifier`, `CredentialGate`
+(+ `ZKredToken`) and `EnrolmentLog`, and writes the public addresses to
+`web/src/deployments/sepolia.json`. Commit and push that file. Without the
+keystore values it stops with `HHE7: Configuration Variable "SEPOLIA_RPC_URL"
+not found`.
+
+### 6. Vercel environment variables (after step 3 is built)
 Vercel → project `zkred` → *Settings → Environment Variables*. Add each as
 *Sensitive*, for the *Production* environment:
 
@@ -85,4 +109,5 @@ Then *Settings → Build and Deployment → Root Directory* = `web`, and redeplo
 ### If a key leaks
 That is lab 04's scenario. As the owner: `Registry.rotateIssuer(newIssuer)`, then
 `Registry.revokeRoot(root)` for every root the attacker published. Swap the
-Vercel env var to the new issuer key.
+Vercel env var to the new issuer key. For a leaked relayer key:
+`EnrolmentLog.setRelayer(newRelayer)` and swap `ZKRED_RELAYER_KEY`.

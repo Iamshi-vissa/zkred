@@ -1,4 +1,4 @@
-import { defineConfig } from "hardhat/config";
+import { configVariable, defineConfig } from "hardhat/config";
 import hardhatToolboxMochaEthers from "@nomicfoundation/hardhat-toolbox-mocha-ethers";
 
 export default defineConfig({
@@ -18,4 +18,15 @@ export default defineConfig({
     tests: { mocha: "test" },
   },
   test: { mocha: { timeout: 120_000 } },
+  networks: {
+    // Live demo (docs/live-demo.md). Both values come from the encrypted
+    // Hardhat keystore (`npx hardhat keystore set <NAME>`), never from a file
+    // in the repo; they are only read when --network sepolia is used.
+    sepolia: {
+      type: "http",
+      chainType: "l1",
+      url: configVariable("SEPOLIA_RPC_URL"),
+      accounts: [configVariable("SEPOLIA_DEPLOYER_KEY")],
+    },
+  },
 });
