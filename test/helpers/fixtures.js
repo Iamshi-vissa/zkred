@@ -7,6 +7,7 @@ import { createIdentity } from "../../scripts/lib/identity.js";
 import { credentialLeaf, buildCircuitInput, CREDENTIAL_TYPES } from "../../scripts/lib/credential.js";
 import { publishRoot } from "../../scripts/lib/issuer.js";
 import { prove, toSolidityArgs } from "../../scripts/lib/prover.js";
+import { deploySystem } from "../../scripts/lib/deploy.js";
 
 // Chain clock for tests: 2027-03-15 12:00:00 UTC (must be after "now").
 export const TODAY = 20270315;
@@ -19,10 +20,7 @@ export async function deployZkred({ credentialType = CREDENTIAL_TYPES.ENROLLED_S
   const [deployer, owner, alice, bob, mallory] = await ethers.getSigners();
   const issuer = Wallet.createRandom(); // runtime key, never written to disk
 
-  const registry = await ethers.deployContract("Registry", [owner.address, issuer.address]);
-  const verifier = await ethers.deployContract("CredentialVerifier");
-  const gate = await ethers.deployContract("CredentialGate", [registry, verifier, actionId, credentialType]);
-  const token = await ethers.getContractAt("ZKredToken", await gate.token());
+  const { registry, verifier, gate, token } = await deploySystem(ethers, { owner, issuerAddress: issuer.address, actionId, credentialType });
   await networkHelpers.time.increaseTo(NOON_TODAY);
 
   const tree = await MerkleTree.create();

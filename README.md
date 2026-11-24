@@ -55,6 +55,28 @@ it is skipped when the circuit hasn't changed.
 npm run check:secrets
 ```
 
+Run the narrated end-to-end demo (in-process network): the issuer enrols
+students and publishes a signed root, a front-run copy of a proof is rejected,
+a student claims 100 ZKRED, a second claim is blocked by the nullifier, and a
+17-year-old cannot produce a proof:
+
+```bash
+npm run demo
+```
+
+Deploy to a local node (run each command in its own terminal):
+
+```bash
+npx hardhat node
+```
+
+```bash
+npm run deploy:local
+```
+
+The issuer key is generated into `keys/issuer-<chainId>.json` and the addresses
+into `build/deployments/<chainId>.json`. Both are gitignored.
+
 Configuration knobs (environment variables):
 
 | Variable | Default | Purpose |
@@ -67,5 +89,5 @@ Configuration knobs (environment variables):
 - [x] Step 2: circuits (`credential.circom` + `lib/merkle.circom` + `lib/age.circom`), constraint table in `docs/circuit-constraints.md`
 - [x] Step 3: trusted setup (PSE ptau + local phase 2) and verifier export, see `docs/trusted-setup.md`
 - [x] Step 4: contracts (Registry, CredentialGate, ZKredToken), see `docs/architecture.md` and `docs/threat-model.md`
-- [ ] Step 5: end-to-end flow
+- [x] Step 5: end-to-end flow (`npm run demo`, `scripts/deploy.js`)
 - [ ] Step 6+: attack lab 01–06
